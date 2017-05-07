@@ -7,6 +7,9 @@ Algorithms using C
 	./a.out
 
 
+# About Me
+* cheng-zhi: C/C++
+
 
 
 
