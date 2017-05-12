@@ -19,10 +19,10 @@ Algorithms using C/C++/Java.
 
 # 编译及运行
 - C:
-	```
-	gcc Ex_1_1_1.c 
-	./a.out
-	```
+```
+gcc Ex_1_1_1.c 
+./a.out
+```
 - C++:
 ```
 g++ Ex_1_1_1.cpp
@@ -31,8 +31,8 @@ g++ Ex_1_1_1.cpp
 
 - Java:
 ```
-	javac Ex_1_1_1.java
-	java  Ex_1_1_1.class
+javac Ex_1_1_1.java
+java  Ex_1_1_1.class
 ```
 
 # 规范
