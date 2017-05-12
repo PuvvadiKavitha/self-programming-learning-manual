@@ -20,7 +20,7 @@ Algorithms using C/C++/Java.
 # 编译及运行
 - C:
 ```
-gcc Ex_1_1_1.c 
+gcc Ex_1_1_1.c -std=c99 
 ./a.out
 ```
 - C++:
