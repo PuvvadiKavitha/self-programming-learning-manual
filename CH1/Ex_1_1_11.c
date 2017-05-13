@@ -9,7 +9,7 @@
  * eg:
  *	show_bool_array(3, 3, bool_array);
  */
-void show_bool_array(const int x, const int y, int bool_array[x][y])
+static void show_bool_array(const int x, const int y, int bool_array[x][y])
 {
 	// Print colum num .
 	for (int k = 0; k <= x; k++)
