@@ -39,6 +39,11 @@ java  Ex_1_1_1.class
 尽可能将算法封装成函数，并提供使用注释，例如算法的原理，关键点等...
 
 # About Me
-- cheng-zhi: C/C++
-- Github：[cheng-zhi](https://github.com/cheng-zhi)
-- 个人主页：[cheng-zhi](https://cheng-zhi.github.io/)
+- cheng-zhi：C / C++
+- GitHub   ：[cheng-zhi](https://github.com/cheng-zhi)
+- 个人主页 ：[cheng-zhi](https://cheng-zhi.github.io/)
+- 微博     ：@cheng-zhi
+- 微信号   ：chengzhi-01
+- 微信公众号：记录我的成长与分享，欢迎扫码关注，id：growingshare
+
+![ID:growingshare](https://cheng-zhi.github.io/img/wechart.jpg)
