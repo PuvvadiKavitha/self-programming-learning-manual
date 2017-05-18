@@ -10,12 +10,15 @@
 #include <string.h>
 
 
+
+
+
 /**
  * @synopsis  main 
  *
  * @return   
  */
-int main(void)
+int main1(void)
 {
 	char name[10] = { 0 };
 	int a = 0;
