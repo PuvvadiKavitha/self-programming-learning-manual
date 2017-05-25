@@ -1,4 +1,4 @@
-#include "my_array.h"
+#include "c_array.h"
 
 
 const int kMinInitCapacity = 1;
