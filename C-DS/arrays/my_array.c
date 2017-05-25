@@ -6,10 +6,10 @@ const int kMinCapacity = 16;
 const int kGrowthFactor = 2;
 const int kShrinkFactor = 4;
 
-MyArray *myarray_new(int capacity) {
-  int really_capacity = myarray_modify_capacity(capacity);
+CArray *carray_new(int capacity) {
+  int really_capacity = carray_modify_capacity(capacity);
   
-  MyArray *array = (MyArray *)malloc(sizeof(MyArray));
+  CArray *array = (CArray *)malloc(sizeof(CArray));
   check_address(array);
 
   array->data = (int *)malloc(sizeof(int) * really_capacity);
@@ -20,7 +20,7 @@ MyArray *myarray_new(int capacity) {
 }
 
 
-void myarray_delete(MyArray *arrptr) {
+void carray_destroy(CArray *arrptr) {
   free(arrptr->data);
   arrptr->data = NULL;
   free(arrptr);
@@ -29,18 +29,11 @@ void myarray_delete(MyArray *arrptr) {
 
 
 
-//void myarray_resize(MyArray *arrptr, int resize) {
-//  
-//}
-
-
-
-
-int myarray_modify_capacity(int capacity) {
+int carray_modify_capacity(int capacity) {
   if (capacity < kMinInitCapacity) {
     exit(-1);
   }
-  else if (capacity <= kMinCapacity) {
+  else if (capacity < kMinCapacity) {
     return kMinCapacity;
   }
   else {
@@ -63,46 +56,164 @@ void check_address(void *address) {
 }
 
 
-void print_myarray(MyArray *arrptr) {
+void print_carray(CArray *arrptr) {
   printf("\nsize = %d\n", arrptr->size);
-  printf("capacity = %d\n", arrptr->capacity);
+  printf("capacity = %d\n\n", arrptr->capacity);
   for (int i = 0; i < arrptr->size; i++)
-    printf("data[i] = %d\n", arrptr->data[i]);
+    printf("data[%d] = %d\n", i, arrptr->data[i]);
 
   putchar('\n');
 }
 
 
 
-int size(MyArray *arrptr) {
+int carray_size(CArray *arrptr) {
   assert((arrptr != NULL) && (arrptr->data != NULL));
   return arrptr->size;
 }
 
 
-int capacity(MyArray *arrptr) {
+int carray_capacity(CArray *arrptr) {
   assert((arrptr != NULL) && (arrptr->data != NULL));
   return arrptr->capacity;
 }
 
 
-int is_empty(MyArray *arrptr) {
-  return !size(arrptr);
+int carray_is_empty(CArray *arrptr) {
+  return !carray_size(arrptr);
 }
 
 
-int at(MyArray *arrptr, int index) {
+int carray_at(CArray *arrptr, int index) {
   assert((arrptr != NULL) && (arrptr->data != NULL));
   return arrptr->data[index];
 }
 
 
-void push(MyArray *arrptr, int item) {
+void carray_push(CArray *arrptr, int item) {
   assert((arrptr != NULL) && (arrptr->data != NULL));
-  arrptr->data[size(arrptr)] = item; 
+  
+  carray_resize(arrptr, arrptr->size + 1);
+
+  arrptr->data[carray_size(arrptr)] = item; 
   arrptr->size++;
 }
 
+void carray_insert(CArray *arrptr, int index, int item) {
+  assert((arrptr != NULL) && (arrptr->data != NULL));
+  assert((index >= 0) && (index <= arrptr->size - 1));
+  
+  carray_resize(arrptr, arrptr->size + 1);
 
+  int last_index = carray_size(arrptr) - 1;
+  
+  for (int i = last_index; i >= index; i--) {
+    arrptr->data[i + 1] = arrptr->data[i];
+  }
+  // Insert...
+  arrptr->data[index] = item;
+  arrptr->size++;
+}
+
+void carray_prepend(CArray *arrptr, int item) {
+  carray_insert(arrptr, 0, item);
+}
+
+
+int carray_pop(CArray *arrptr) {
+  assert((arrptr != NULL) && (arrptr->data != NULL) && (arrptr->size != 0));
+
+  carray_resize(arrptr, arrptr->size - 1);
+
+  int last = arrptr->data[carray_size(arrptr) - 1];
+  arrptr->size--;
+  return last;
+}
+
+
+void carray_delete(CArray *arrptr, int index) {
+  assert((arrptr != NULL) && (arrptr->data != NULL));
+  
+  carray_resize(arrptr, arrptr->size - 1);
+  
+  int last_index = carray_size(arrptr) - 1;
+  
+  for (int i = index; i < last_index; i++) {
+	  arrptr->data[i] = arrptr->data[i + 1];
+  }
+  
+  arrptr->size--;
+}
+
+
+int carray_find(CArray *arrptr, int item) {
+  assert((arrptr != NULL) && (arrptr->data != NULL));
+  int len = carray_size(arrptr);
+
+  for (int i = 0; i < len; i++) {
+    if (item == arrptr->data[i])
+		return i;
+  }
+
+  return -1;
+}
+
+
+void carray_resize(CArray *arrptr, int candidate_size) {
+  assert((arrptr != NULL) && (arrptr->data != NULL));
+  if (arrptr->size < candidate_size) {
+    if (arrptr->size == arrptr->capacity) {
+	  carray_up_size(arrptr);
+	}
+  } else if (arrptr->size > candidate_size) {
+    if (arrptr->size < arrptr->capacity / kShrinkFactor) {
+	  carray_down_size(arrptr);
+	}
+  }
+}
+
+
+void carray_up_size(CArray *arrptr) {
+  int old_capacity = arrptr->capacity;
+  int new_capacity = old_capacity * 2;//myarray_modify_capacity(old_capacity);
+  //printf("up_size: old_capacity = %d\n", old_capacity);
+  //printf("up_size: new_capacity = %d\n", new_capacity);
+  int *new_data = (int *)malloc(sizeof(int) * new_capacity);
+  check_address(new_data);
+
+  for (int i = 0; i < arrptr->size; i++) {
+    new_data[i] = arrptr->data[i];
+  }
+
+  free(arrptr->data);
+  arrptr->data = new_data;
+  arrptr->capacity = new_capacity;
+}
+
+
+
+void carray_down_size(CArray *arrptr) {
+  int old_capacity = arrptr->capacity;
+  int new_capacity = arrptr->capacity / 2;
+  
+  if (new_capacity < kMinCapacity) {
+    new_capacity = kMinCapacity;
+  }
+  
+  if (new_capacity != old_capacity) {
+    int *new_data = (int *)malloc(sizeof(int) * new_capacity);
+	
+	check_address(new_data);
+	
+	for (int i = 0; i < arrptr->size; i++) {
+	  new_data[i] = arrptr->data[i];
+	}
+
+	free(arrptr->data);
+	arrptr->data = new_data;
+	arrptr->capacity = new_capacity;
+  }
+
+}
 
 
