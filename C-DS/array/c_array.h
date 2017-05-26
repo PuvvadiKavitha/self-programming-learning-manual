@@ -30,7 +30,7 @@ void check_address(void *address);
 void print_carray(CArray *arrptr);
 
 // Return myarray size.
-int carry_size(CArray *arrptr);
+int carray_size(CArray *arrptr);
 
 // Return myarray capacity.
 int carray_capacity(CArray *arrptr);

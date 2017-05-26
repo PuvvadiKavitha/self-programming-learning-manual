@@ -6,7 +6,9 @@ const int kMinCapacity = 16;
 const int kGrowthFactor = 2;
 const int kShrinkFactor = 4;
 
+
 CArray *carray_new(int capacity) {
+  // Adjust capacity to the power of 2 - 16, 32, 64, 128
   int really_capacity = carray_modify_capacity(capacity);
   
   CArray *array = (CArray *)malloc(sizeof(CArray));
@@ -133,6 +135,7 @@ int carray_pop(CArray *arrptr) {
 
 void carray_delete(CArray *arrptr, int index) {
   assert((arrptr != NULL) && (arrptr->data != NULL));
+  assert((index >= 0) && (index <= arrptr->size - 1));
   
   carray_resize(arrptr, arrptr->size - 1);
   
@@ -175,9 +178,7 @@ void carray_resize(CArray *arrptr, int candidate_size) {
 
 void carray_up_size(CArray *arrptr) {
   int old_capacity = arrptr->capacity;
-  int new_capacity = old_capacity * 2;//myarray_modify_capacity(old_capacity);
-  //printf("up_size: old_capacity = %d\n", old_capacity);
-  //printf("up_size: new_capacity = %d\n", new_capacity);
+  int new_capacity = old_capacity * 2;
   int *new_data = (int *)malloc(sizeof(int) * new_capacity);
   check_address(new_data);
 
