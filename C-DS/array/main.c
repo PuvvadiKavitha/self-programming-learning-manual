@@ -143,6 +143,25 @@ void test_delete() {
 }
 
 
+void test_remove() {
+  CArray* array = carray_new(2);
+  
+  carray_push(array, 1);
+  carray_push(array, 2);
+  carray_push(array, 3);
+  carray_push(array, 3);
+  carray_push(array, 3);
+  carray_push(array, 4);
+
+  
+  carray_remove(array, 3);
+  
+  assert(carray_find(array, 3)== -1);
+  
+  carray_destroy(array);
+}
+
+
 
 
 void test_find() {
@@ -161,16 +180,17 @@ void test_find() {
 }
 
 void run_all_test() {
-  test_init_size();
-  test_push();
-  test_empty();
-  test_at();
-  test_insert();
-  test_prepend();
-  test_pop();
-  test_delete();
-  test_find();
-  test_resize();
+//  test_init_size();
+//  test_push();
+//  test_empty();
+//  test_at();
+//  test_insert();
+//  test_prepend();
+//  test_pop();
+//  test_delete();
+//  test_find();
+//  test_resize();
+  test_remove();
 }
 
 

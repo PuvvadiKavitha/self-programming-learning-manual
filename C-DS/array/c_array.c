@@ -149,6 +149,14 @@ void carray_delete(CArray *arrptr, int index) {
 }
 
 
+void carray_remove(CArray *arrptr, int item) {
+  int end_index = carray_size(arrptr) - 1;
+  for (int i = 0; i < end_index; i++) {
+    if (item == arrptr->data[i]) 
+		carray_delete(arrptr, i--);
+  }
+}
+
 int carray_find(CArray *arrptr, int item) {
   assert((arrptr != NULL) && (arrptr->data != NULL));
   int len = carray_size(arrptr);

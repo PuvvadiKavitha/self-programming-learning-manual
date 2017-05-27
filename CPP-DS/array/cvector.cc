@@ -64,12 +64,18 @@ int CVector::At(int index) const {
 }
 
 void CVector::Push(int item) {
+  Resize(size() + 1);
   data_[size()] = item;
   size_++;
 }
 
 
 void CVector::Insert(int index, int item) {
+  if ((index < 0) || (index > (size() - 1)))
+	  exit(EXIT_FAILURE);
+  
+  Resize(size() + 1);
+
   for (int i = size() - 1; i >= index; i--)
 	  data_[i + 1] = data_[i];
   data_[index] = item;
@@ -82,10 +88,85 @@ void CVector::Prepend(int item) {
 
 
 int CVector::Pop() {
+  Resize(size() - 1);
+  
   int pop_value = data_[size() - 1];
   size_--;
   return pop_value;
 }
+
+
+
+
+void CVector::Delete(int index) {
+  if ((index < 0) || (index > (size() - 1)))
+	  exit(EXIT_FAILURE);
+  
+  Resize(size() - 1);
+
+  for (int i = index; i < size(); i++)
+	  data_[i] = data_[i + 1];
+  
+  size_--;
+}
+
+
+void CVector::Remove(int item) {
+  int len = size();
+  for (int i = 0; i < len; i++) {
+    if (item == data_[i])
+		Delete(i--);
+  }
+}
+
+int CVector::Find(int item) const {
+  for (int i = 0; i < size(); i++) {
+    if (item == data_[i])
+		return i;
+  }
+
+  return -1;
+}
+
+
+void CVector::Resize(int new_capacity) {
+  if (capacity() < new_capacity) {
+    if (size() == capacity()) {
+	  UpSize();
+	}
+  } else if (capacity() > new_capacity) {
+    if (size() < (capacity() / kShrinkFactory)) {
+	  DownSize();
+	}
+  }
+}
+
+void CVector::UpSize() {
+  int new_capacity = capacity() * kGrowthFactory;
+  std::unique_ptr<int []> new_data(new int[new_capacity]);
+  for (int i = 0; i < size(); i++)
+	  new_data[i] = At(i);
+  
+  capacity_ = new_capacity;
+  data_ = std::move(new_data);
+}
+
+
+void CVector::DownSize() {
+  int new_capacity = capacity() / kGrowthFactory;
+
+  if (new_capacity < kMinCapacity)
+	  new_capacity = kMinCapacity;
+
+  std::unique_ptr<int []> new_data(new int[new_capacity]);
+  for (int i = 0; i < size(); i++)
+	  new_data[i] = At(i);
+
+  capacity_ = new_capacity;
+  data_ = std::move(new_data);
+}
+
+
 
 
 

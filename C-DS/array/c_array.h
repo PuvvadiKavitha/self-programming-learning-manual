@@ -56,6 +56,9 @@ int carray_pop(CArray *arrptr);
 // Delete arrptr->data[index].
 void carray_delete(CArray *arrptr, int index);
 
+// Remove all item in arrptr.
+void carray_remove(CArray *arrptr, int item);
+
 // If find then return 1, otherwise return 0.
 int carray_find(CArray *arrptr, int item);
 

@@ -20,8 +20,14 @@ class CVector {
 	void Insert(int index, int item);
 	void Prepend(int item);
 	int Pop();
+	void Delete(int index);
+	void Remove(int item);
+	int Find(int item) const;
   private:
     int DetermineCapacity(int capacity);
+	void Resize(int new_capacity);
+	void UpSize();
+	void DownSize();
   private:
     int size_ { 0 };
     int capacity_ { 0 };

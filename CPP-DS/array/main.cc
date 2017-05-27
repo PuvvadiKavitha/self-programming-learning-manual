@@ -56,23 +56,22 @@ void test_at() {
 
 void test_push() {
   cspace::CVector vec(10);
-  assert(vec.size() == 0);
-  vec.Push(1);
-  vec.Push(2);
-  vec.Push(3);
-  assert(vec.size() == 3);
+  assert(vec.capacity() == 16);
+  for (int i = 0; i < 20; i++)
+    vec.Push(i + 1);
+
+  assert(vec.capacity() == 32);
+  assert(vec.size() == 20);
 }
 
 void test_insert() {
   cspace::CVector vec(10);
-  assert(vec.size() == 0);
-  vec.Push(1);
-  vec.Push(2);
-  vec.Push(3);
+  for (int i = 0; i < vec.capacity(); i++)
+    vec.Push(i + 1);
+  
   vec.Insert(1, 22);
-  assert(vec.size() == 4);
+  assert(vec.capacity() == 32);
   assert(vec.At(1) == 22);
-  assert(vec.At(2) == 2);
 }
 
 void test_prepend() {
@@ -99,19 +98,86 @@ void test_pop() {
   assert(vec.size() == 0);
 }
 
+void test_delete() {
+  cspace::CVector vec(10);
+  vec.Push(1);
+  vec.Push(2);
+  vec.Push(3);
+  assert(vec.size() == 3);
+  vec.Delete(1);
+  assert(vec.At(1) == 3);
+  assert(vec.size() == 2);
+}
 
 
+
+void test_remove() {
+  cspace::CVector vec(10);
+  vec.Push(1);
+  vec.Push(2);
+  vec.Push(2);
+  vec.Push(2);
+  vec.Push(2);
+  vec.Push(3);
+
+  vec.Remove(2);
+
+  assert(vec.size() == 2);
+  assert(vec.Find(2) == -1);
+}
+
+void test_find() {
+  cspace::CVector vec(10);
+  vec.Push(1);
+  vec.Push(2);
+  vec.Push(3);
+
+  assert(vec.Find(1) == 0);
+  assert(vec.Find(4) == -1);
+}
+/*
+void test_resize_up() {
+  cspace::CVector vec(10);
+  for (int i = 0; i < vec.capacity(); i++)
+	  vec.Push(i + 1);
+
+  assert(vec.size() == 16);
+
+  vec.Resize(18);
+  
+  assert(vec.size() == 32);
+  assert(vec.At(15) == 16);
+}
+
+
+void test_resize_down() {
+  cspace::CVector vec(30);
+  for (int i = 0; i < 5; i++)
+	  vec.Push(i + 1);
+  assert(vec.size() == 5);
+  assert(vec.capacity() == 32);
+
+  vec.Resize(15);
+  
+  assert(vec.capacity() == 16);
+}
+*/
 
 void run_all_test() {
-  test_print();
-  test_size();
-  test_capacity();
-  test_is_empty();
-  test_at();
-  test_push();
-  test_insert();
-  test_prepend();
-  test_pop();
+  //test_print();
+  //test_size();
+  //test_capacity();
+  //test_is_empty();
+  //test_at();
+  //test_push();
+  //test_insert();
+  //test_prepend();
+  //test_pop();
+  //test_delete();
+  test_remove();
+  //test_find();
+  //test_resize_up();
+  //test_resize_down();
 }
 
 int main(void) {
