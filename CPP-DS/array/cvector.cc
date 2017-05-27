@@ -69,6 +69,28 @@ void CVector::Push(int item) {
 }
 
 
+void CVector::Insert(int index, int item) {
+  for (int i = size() - 1; i >= index; i--)
+	  data_[i + 1] = data_[i];
+  data_[index] = item;
+  size_++;
+}
+
+void CVector::Prepend(int item) {
+  Insert(0, item);
+}
+
+
+int CVector::Pop() {
+  int pop_value = data_[size() - 1];
+  size_--;
+  return pop_value;
+}
+
+
+
+
+
 
 
 

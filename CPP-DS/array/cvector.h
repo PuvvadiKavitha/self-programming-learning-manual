@@ -17,6 +17,9 @@ class CVector {
 	bool IsEmpty() const;
 	int At(int index) const;
 	void Push(int item);
+	void Insert(int index, int item);
+	void Prepend(int item);
+	int Pop();
   private:
     int DetermineCapacity(int capacity);
   private:

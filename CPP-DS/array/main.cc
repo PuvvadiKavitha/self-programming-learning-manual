@@ -63,6 +63,45 @@ void test_push() {
   assert(vec.size() == 3);
 }
 
+void test_insert() {
+  cspace::CVector vec(10);
+  assert(vec.size() == 0);
+  vec.Push(1);
+  vec.Push(2);
+  vec.Push(3);
+  vec.Insert(1, 22);
+  assert(vec.size() == 4);
+  assert(vec.At(1) == 22);
+  assert(vec.At(2) == 2);
+}
+
+void test_prepend() {
+  cspace::CVector vec(10);
+  assert(vec.size() == 0);
+  vec.Push(1);
+  vec.Push(2);
+  vec.Push(3);
+  vec.Prepend(22);
+  assert(vec.size() == 4);
+  assert(vec.At(0) == 22);
+  assert(vec.At(1) == 1);
+}
+
+void test_pop() {
+  cspace::CVector vec(10);
+  vec.Push(1);
+  vec.Push(2);
+  vec.Push(3);
+  assert(vec.size() == 3);
+  vec.Pop();
+  vec.Pop();
+  vec.Pop();
+  assert(vec.size() == 0);
+}
+
+
+
+
 void run_all_test() {
   test_print();
   test_size();
@@ -70,6 +109,9 @@ void run_all_test() {
   test_is_empty();
   test_at();
   test_push();
+  test_insert();
+  test_prepend();
+  test_pop();
 }
 
 int main(void) {
