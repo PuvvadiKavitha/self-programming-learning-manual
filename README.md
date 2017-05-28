@@ -1,5 +1,5 @@
 # Algorithms-C
-Algorithms using C/C++/Java.
+Algorithms using C/C++/Java/Python.
 
 # 项目来由
 
@@ -7,7 +7,19 @@ Algorithms using C/C++/Java.
 
 # 为何要发起这个项目
 
-因为数据结构和算法是计算机科学的内功，编程离不开它，很多大神最后提供的建议就是在大学要将数据结构和算法学好！
+数据结构和算法是计算机科学的内功，编程离不开它！
+
+# 数据结构
+
+算法使用的数据结构完全属于自己编写，其中会包括我编写的所有的数据结构，例如：
+- 动态数组
+- 链表
+- 树
+
+还有很多，这些数据结构是完成这些算法题目的基础，我会根据题目要求逐渐完善需要使用的数据结构。
+
+# Python
+其中还会有我学习 `Python` 完成的一些例子，用 `Python` 写算法我使用的是内置的类型（AI 时代即将到来，你需要了解`Python`）。
 
 # 命名规则
 
@@ -25,7 +37,7 @@ gcc Ex_1_1_1.c -std=c99
 ```
 - C++:
 ```
-g++ Ex_1_1_1.cpp
+g++ Ex_1_1_1.cpp -std=c++11
 ./a.out
 ```
 
@@ -35,15 +47,21 @@ javac Ex_1_1_1.java
 java  Ex_1_1_1.class
 ```
 
+- Python
+```
+chmod a+x test.py
+./test.py
+```
+
 # 规范
 尽可能将算法封装成函数，并提供使用注释，例如算法的原理，关键点等...
 
 # About Me
 - cheng-zhi：C / C++
-- GitHub   ：[cheng-zhi](https://github.com/cheng-zhi)
-- 个人主页 ：[cheng-zhi](https://cheng-zhi.github.io/)
+- GitHub   ：[https://github.com/cheng-zhi](https://github.com/cheng-zhi)
+- 个人主页 ：[http://cheng-zhi.me](http://cheng-zhi.me)
 - 微博     ：@cheng-zhi
 - 微信号   ：chengzhi-01
-- 微信公众号：记录我的成长与分享，欢迎扫码关注，id：growingshare
+- 微信公众号：GrowingShare
 
-![ID:growingshare](https://cheng-zhi.github.io/img/wechart.jpg)
+![ID:growingshare](http://cheng-zhi.me/images/wechart.jpg)
