@@ -180,13 +180,99 @@ static double **transpose(int row, int col, double x[row][col]) {
   return t_array;
 }
 
+/**
+ * @synopsis  mult_one 
+ *
+ * @param row
+ * @param col
+ * @param x[row][col]
+ * @param len
+ * @param y[len]
+ *
+ * @return   
+ *   1 2  
+ *   3 4 
+ *    *
+ *   2 3
+ *    =
+ *   [1 * 2 + 2 * 3, 2 * 3 + 3 * 4]
+ */
+static double *mult_one(int row, int col, double x[row][col], int len, double y[len]) {
+
+  if (col != len) {
+    return NULL;
+  }
+
+  double *matrix = (double *)malloc(sizeof(double) * col);
+
+  for (int i = 0; i < row; i++) {
+    for (int j = 0; j < col; j++) {
+	  matrix[i] += x[i][j] * y[j];
+	}
+  }
+
+  return matrix;
+}
+
+/**
+ * @synopsis  mult_two 
+ *
+ * @param len
+ * @param y[len]
+ * @param row
+ * @param col
+ * @param x[row][col]
+ *
+ * @return   
+ *   2 3
+ *    *
+ *   1 2 
+ *   3 4
+ *    =
+ *   [2 * 1 + 2 * 2, 3 * 3 + 3 * 4]
+ */
+static double *mult_two(int len, double y[len], int row, int col, double x[row][col]) {
+
+  if (col != len) {
+    return NULL;
+  }
+
+  double *matrix = (double *)malloc(sizeof(double) * len);
+
+  for (int i = 0; i < len; i++) {
+    for (int j = 0; j < col; j++) {
+	  matrix[i] += y[i] * x[i][j];
+	}
+  }
+
+  return matrix;
+}
+
+void test_mult_one() {
+  double x[2][2] = { 1, 2, 3, 4 };
+  double y[2] = { 2, 3 };
+
+  double *ret = mult_one(2, 2, x, 2, y);
+  for (int i = 0; i < 2; i++)
+	  printf("\t%.2f\t", ret[i]);
+}
+
+void test_mult_two() {
+  double x[2][2] = { 1, 2, 3, 4 };
+  double y[2] = { 2, 3 };
+
+  double *ret = mult_two(2, y, 2, 2, x);
+  for (int i = 0; i < 2; i++)
+	  printf("\t%.2f\t", ret[i]);
+}
+
 
 
 static void test_dot() {
   double x[3] = { 3, 2, 3 };
   double y[3] = { 3, 2, 1 };
   double sum = dot(x, 3, y, 3);
-  printf("sum = %.3f\n", sum);
+  printf("\tsum = %.3f\n", sum);
 }
 
 
@@ -220,9 +306,17 @@ int main(void)
 {
   test_dot();
   putchar('\n');
+  
   test_mult();
   putchar('\n');
+  
   test_transpose();
+  putchar('\n');
+  
+  test_mult_one(); 
+  putchar('\n');
+  
+  test_mult_two(); 
   putchar('\n');
   return 0;
 }

@@ -3,7 +3,7 @@ Algorithms using C/C++/Java/Python.
 
 # 项目来由
 
-这个项目的题目来源与 [算法 第四版](https://book.douban.com/subject/19952400/)，项目旨在使用 C/C++/Java 来编写书中的所有算法，不过本人倾向与使用 C 语言，你可以根据你的喜好提供一个算法的不同实现版本。
+这个项目的题目来源与 [算法 第四版](https://book.douban.com/subject/19952400/)，项目旨在使用 C/C++/Java/Python 来编写书中的所有算法，不过本人倾向与使用 C 语言，你可以根据你的喜好提供一个算法的不同实现版本。
 
 # 为何要发起这个项目
 
@@ -57,7 +57,7 @@ chmod a+x test.py
 尽可能将算法封装成函数，并提供使用注释，例如算法的原理，关键点等...
 
 # About Me
-- cheng-zhi：C / C++
+- cheng-zhi：C/C++
 - GitHub   ：[https://github.com/cheng-zhi](https://github.com/cheng-zhi)
 - 个人主页 ：[http://cheng-zhi.me](http://cheng-zhi.me)
 - 微博     ：@cheng-zhi
