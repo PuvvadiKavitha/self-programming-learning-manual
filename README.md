@@ -1,9 +1,8 @@
-# Algorithms-C
-Algorithms using C/C++/Java/Python.
+# Aumds
+Algorithms using my data struct. 
 
 # 项目来由
-
-这个项目的题目来源与 [算法 第四版](https://book.douban.com/subject/19952400/)，项目旨在使用 C/C++/Java/Python 来编写书中的所有算法，不过本人倾向与使用 C 语言，你可以根据你的喜好提供一个算法的不同实现版本。
+这个项目记录我使用自己编写的数据结构来解决的算法问题，同时也包含了 [算法 第四版](https://book.douban.com/subject/19952400/) 上的部分习题。
 
 # 为何要发起这个项目
 
@@ -15,20 +14,20 @@ Algorithms using C/C++/Java/Python.
 - 动态数组
 - 链表
 - 树
+- 等等... 
 
 还有很多，这些数据结构是完成这些算法题目的基础，我会根据题目要求逐渐完善需要使用的数据结构。
 
-# Python
-其中还会有我学习 `Python` 完成的一些例子，用 `Python` 写算法我使用的是内置的类型（AI 时代即将到来，你需要了解`Python`）。
+# 编程语言
+主要使用 C/C++/Python 这 3 种语言。
 
-# 命名规则
+# 部分习题的命名规则
 
 例如第一章的习题1.1.1
 
 - C   ：Ex_1_1_1.c
 - cpp ：Ex_1_1_1.cpp
-- Java：Ex_1_1_1.java
-
+- python：Ex_1_1_1.py
 # 编译及运行
 - C:
 ```
@@ -39,12 +38,6 @@ gcc Ex_1_1_1.c -std=c99
 ```
 g++ Ex_1_1_1.cpp -std=c++11
 ./a.out
-```
-
-- Java:
-```
-javac Ex_1_1_1.java
-java  Ex_1_1_1.class
 ```
 
 - Python
