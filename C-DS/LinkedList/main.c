@@ -110,6 +110,83 @@ void test_back() {
 
 }
 
+void test_insert() {
+  node_t *head = NULL;
+  push_back(&head, 1);
+  push_back(&head, 2);
+  push_back(&head, 3);
+  
+  insert(&head, 0, 11);
+  insert(&head, 2, 22);
+  insert(&head, 5, 33);
+  assert(value_at(head, 0) == 11);
+  assert(value_at(head, 2) == 22);
+  assert(value_at(head, 5) == 33);
+  print_list(head);
+}
+
+
+void test_erase() {
+  node_t *head = NULL;
+  push_back(&head, 1);
+  push_back(&head, 2);
+  push_back(&head, 3);
+  push_back(&head, 4);
+  push_back(&head, 5);
+  
+  erase(&head, 0);
+  erase(&head, 1);
+  erase(&head, 2);
+  
+  assert(value_at(head, 0) == 2);
+  assert(value_at(head, 1) == 4);
+  print_list(head);
+}
+
+void test_value_of_from_end() {
+  node_t *head = NULL;
+  push_back(&head, 1);
+  push_back(&head, 2);
+  push_back(&head, 3);
+  push_back(&head, 4);
+  push_back(&head, 5);
+ 
+
+  assert(value_n_from_end(head, 2) == 4);
+
+}
+
+
+void test_reverse() {
+  node_t *head = NULL;
+  push_back(&head, 1);
+  push_back(&head, 2);
+  push_back(&head, 3);
+  push_back(&head, 4);
+  push_back(&head, 5);
+
+  print_list(head);
+  reverse(&head);
+  print_list(head);
+}
+
+
+void test_remove_value() {
+  node_t *head = NULL;
+  push_back(&head, 1);
+  push_back(&head, 2);
+  push_back(&head, 2);
+  push_back(&head, 4);
+  push_back(&head, 5);
+
+  remove_value(&head, 2);
+  remove_value(&head, 4);
+  print_list(head);
+  putchar('\n');
+}
+
+
+
 
 void run_all_test() {
   //test_size();
@@ -120,8 +197,13 @@ void run_all_test() {
   //test_push_front();
   //test_pop_front();
   //test_pop_back();
-  test_front();
-  test_back();
+  //test_front();
+  //test_back();
+  //test_insert();
+  //test_erase();
+  //test_value_of_from_end();
+  //test_reverse();
+  test_remove_value();
 }
 
 
