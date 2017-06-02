@@ -83,4 +83,51 @@ void LinkedList<T>::PrintList() {
 }
 
 
+template<typename T>
+const T LinkedList<T>::PopFront() {
+  T pop_value = head_->data();
+  auto first = head_;
+  head_ = head_->next();
+  delete first;
+  first = nullptr;
+  return pop_value;
+}
+
+
+template<typename T>
+void LinkedList<T>::PushBack(const T item) {
+  auto new_node = new Node<T>(item);
+  new_node->set_next(nullptr);
+
+  auto current = head_;
+  
+  while (current->next())
+	  current = current->next();
+  
+  current->set_next(new_node);
+}
+
+
+
+template<typename T>
+const T LinkedList<T>::PopBack() {
+  auto current = head_;
+  Node<T> *prev = nullptr;
+
+  while (current->next()) {
+    prev = current;
+	current = current->next();
+  }
+
+  T pop_value = current->data();
+  prev->set_next(nullptr);
+  
+  delete current;
+  current = nullptr;
+  
+  return pop_value;
+}
+
+
+
 

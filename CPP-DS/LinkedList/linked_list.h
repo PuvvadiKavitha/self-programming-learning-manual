@@ -14,6 +14,9 @@ class LinkedList {
   const T& ValueAt(int index);
   void PushFront(const T item);
   void PrintList();
+  const T PopFront();
+  void PushBack(const T item);
+  const T PopBack();
  private:
   Node<T> *head_;
 

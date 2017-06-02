@@ -90,6 +90,58 @@ void test_value_at(void) {
 }
 
 
+void test_pop_front(void) {
+  LinkedList<int> link;
+  
+  link.PushFront(1);
+  link.PushFront(2);
+  link.PushFront(3);
+  
+  link.PrintList();
+  
+  assert(link.ValueAt(0) == 3);
+  assert(link.Size() == 3);
+  
+  link.PopFront();
+  link.PrintList();
+  
+  assert(link.ValueAt(0) == 2);
+  assert(link.Size() == 2);
+}
+
+void test_push_back(void) {
+  LinkedList<int> link;
+  
+  link.PushFront(1);
+  link.PushFront(2);
+  link.PushFront(3);
+  
+  link.PrintList();
+  
+  link.PushBack(2);
+  link.PushBack(3);
+
+  link.PrintList();
+  
+  assert(link.ValueAt(3) == 2);
+  assert(link.Size() == 5);
+}
+
+void test_pop_back(void) {
+  LinkedList<int> link;
+  
+  link.PushFront(1);
+  link.PushFront(2);
+  link.PushFront(3);
+  
+  link.PrintList();
+  
+  assert(link.PopBack() == 1);
+  link.PrintList();
+  assert(link.Size() == 2);
+}
+
+
 
 
 void run_all_test(void) {
@@ -98,7 +150,10 @@ void run_all_test(void) {
   //test_push_front();
   //test_empty();
   //test_size();
-  test_value_at();
+  //test_value_at();
+  //test_pop_front();
+  //test_push_back();
+  test_pop_back();
 }
 
 
