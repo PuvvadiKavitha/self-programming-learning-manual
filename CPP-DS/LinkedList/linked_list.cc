@@ -130,4 +130,139 @@ const T LinkedList<T>::PopBack() {
 
 
 
+template<typename T>
+const T LinkedList<T>::Front() const {
+  return head_->data();
+}
+
+
+
+
+template<typename T>
+const T LinkedList<T>::Back() const {
+  auto current = head_;
+  while (current->next())
+	  current = current->next();
+  return current->data();
+}
+
+
+template<typename T>
+void LinkedList<T>::Insert(int index, const T value) {
+  auto current = head_;
+  Node<T> *prev = nullptr;
+  
+  int i = 0;
+  for (i = 0; (i < index) && current; i++) {
+    prev = current;
+	current = current->next();
+  }
+
+  if (i != index) {
+    std::cout << "Index out of bounds" << std::endl;
+	exit(EXIT_FAILURE);
+  }
+
+  auto new_node = new Node<T>(value);
+
+  if (prev != nullptr) {
+    new_node->set_next(prev->next());
+	prev->set_next(new_node);
+  } else {
+    new_node->set_next(head_);
+	head_ = new_node;
+  }
+}
+
+
+
+
+template<typename T>
+void LinkedList<T>::Erase(const int index) {
+  auto current = head_;
+  Node<T> *prev = nullptr;
+
+  int i = 0;
+  for (i = 0; (i < index) && current; i++) {
+    prev = current;
+	current = current->next();
+  }
+
+  if (i != index) {
+    std::cout << "Index out of bounds" << std::endl;
+	exit(EXIT_FAILURE);
+  }
+  
+  if (prev)
+    prev->set_next(current->next());
+  else
+    head_ = current->next();
+  
+  delete current;
+  current = nullptr;
+}
+
+
+
+template<typename T>
+T LinkedList<T>::ValueNFromEnd(const int n) const {
+  auto current = head_;
+  auto match = head_;
+ 
+  int i = 0;
+  for (i = 0; (i < n) && current; i++)
+    current = current->next();
+
+  if (i != n) {
+    std::cout << "Index out of bound" << std::endl;
+	exit(EXIT_FAILURE);
+  }
+  
+  while (current) {
+    current = current->next();
+	match = match->next();
+  }
+
+  return match->data();
+}
+
+
+
+template<typename T>
+void LinkedList<T>::Reverse() {
+  auto current = head_;
+  Node<T> *prev = nullptr;
+  Node<T> *next = nullptr;
+
+  while (current) {
+    next = current->next();
+	current->set_next(prev);
+	prev = current;
+	current = next;
+  }
+  
+  head_ = prev;
+}
+
+template<typename T>
+void LinkedList<T>::RemoveValue(const int value) {
+  auto current = head_;
+  Node<T> *prev = nullptr;
+
+  while (current) {
+    if (value == current->data()) {
+	  if (prev)
+	    prev->set_next(current->next());
+	  else 
+	    head_ = current->next();
+	  delete current;
+	  current = nullptr;
+	  break;
+	} else {
+	  prev = current;
+	  current = current->next();
+	}
+  }
+}
+
 

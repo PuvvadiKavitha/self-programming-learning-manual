@@ -142,6 +142,110 @@ void test_pop_back(void) {
 }
 
 
+void test_front(void) {
+  LinkedList<int> link;
+  
+  link.PushFront(1);
+  link.PushFront(2);
+  link.PushFront(3);
+  
+  assert(link.Front() == 3);
+}
+
+
+
+void test_back(void) {
+  LinkedList<int> link;
+  
+  link.PushFront(1);
+  link.PushFront(2);
+  link.PushFront(3);
+  
+  assert(link.Back() == 1);
+}
+
+
+void test_insert(void) {
+  LinkedList<int> link;
+  
+  link.PushFront(1);
+  link.PushFront(2);
+  link.PushFront(3);
+ 
+  link.Insert(0, 0);
+  link.Insert(1, 22);
+  link.Insert(4, 22);
+  
+  link.PrintList();
+}
+
+
+
+void test_erase(void) {
+  LinkedList<int> link;
+  
+  link.PushFront(1);
+  link.PushFront(2);
+  link.PushFront(3);
+  link.PushFront(4);
+  link.PushFront(5);
+ 
+  link.PrintList();
+  link.Erase(0);
+  link.Erase(3);
+  link.Erase(1);
+}
+
+
+
+void test_value_end(void) {
+  LinkedList<int> link;
+  
+  link.PushFront(1);
+  link.PushFront(2);
+  link.PushFront(3);
+  link.PushFront(4);
+
+  assert(link.ValueNFromEnd(1) == 1);
+  assert(link.ValueNFromEnd(3) == 3);
+  assert(link.ValueNFromEnd(4) == 4);
+}
+
+
+void test_reverse(void) {
+  LinkedList<int> link;
+  
+  link.PushFront(1);
+  link.PushFront(2);
+  link.PushFront(3);
+  link.PushFront(4);
+
+  link.PrintList();
+
+  link.Reverse();
+
+  link.PrintList();
+}
+
+
+void test_remove_value(void) {
+  LinkedList<int> link;
+  
+  link.PushFront(1);
+  link.PushFront(2);
+  link.PushFront(2);
+  link.PushFront(3);
+  link.PushFront(4);
+
+
+  link.PrintList();
+
+  link.RemoveValue(2);
+  
+  link.PrintList();
+}
+
+
 
 
 void run_all_test(void) {
@@ -153,7 +257,15 @@ void run_all_test(void) {
   //test_value_at();
   //test_pop_front();
   //test_push_back();
-  test_pop_back();
+  //test_pop_back();
+  //test_front();
+  //test_back();
+  //test_insert();
+  //test_erase();
+  //test_erase();
+  //test_value_end();
+  //test_reverse();
+  test_remove_value();
 }
 
 

@@ -17,6 +17,13 @@ class LinkedList {
   const T PopFront();
   void PushBack(const T item);
   const T PopBack();
+  const T Front() const;
+  const T Back() const;
+  void Insert(int index, const T value);
+  void Erase(const int index);
+  T ValueNFromEnd(const int n) const;
+  void Reverse();
+  void RemoveValue(const int value);
  private:
   Node<T> *head_;
 
