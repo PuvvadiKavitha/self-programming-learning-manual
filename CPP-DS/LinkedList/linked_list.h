@@ -23,7 +23,7 @@ class LinkedList {
   void Erase(const int index);
   T ValueNFromEnd(const int n) const;
   void Reverse();
-  void RemoveValue(const int value);
+  void RemoveValue(const T value);
  private:
   Node<T> *head_;
 

@@ -98,13 +98,17 @@ template<typename T>
 void LinkedList<T>::PushBack(const T item) {
   auto new_node = new Node<T>(item);
   new_node->set_next(nullptr);
-
+  
   auto current = head_;
   
-  while (current->next())
+  if (nullptr == current) {
+    head_ = new_node;
+  } else {
+    while (current->next())
 	  current = current->next();
   
-  current->set_next(new_node);
+    current->set_next(new_node);
+  }
 }
 
 
@@ -206,6 +210,11 @@ void LinkedList<T>::Erase(const int index) {
 
 template<typename T>
 T LinkedList<T>::ValueNFromEnd(const int n) const {
+  if ((n < 1)) {
+    std::cout << "ValueNFromEnd(n): n > 0" << std::endl;
+	exit(EXIT_FAILURE);
+  }
+	
   auto current = head_;
   auto match = head_;
  
@@ -245,7 +254,7 @@ void LinkedList<T>::Reverse() {
 }
 
 template<typename T>
-void LinkedList<T>::RemoveValue(const int value) {
+void LinkedList<T>::RemoveValue(const T value) {
   auto current = head_;
   Node<T> *prev = nullptr;
 
