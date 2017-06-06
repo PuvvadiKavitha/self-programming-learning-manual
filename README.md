@@ -2,7 +2,7 @@
 Algorithms using my data struct. 
 
 # 项目来由
-这个项目记录我使用自己编写的数据结构来解决的算法问题，同时也包含了 [算法 第四版](https://book.douban.com/subject/19952400/) 上的部分习题。
+这个项目记录我使用自己编写的数据结构来解决的算法问题，同时也包含了 自己整理的算法问题以及 [算法 第四版](https://book.douban.com/subject/19952400/) 上的部分习题。
 
 # 为何要发起这个项目
 
