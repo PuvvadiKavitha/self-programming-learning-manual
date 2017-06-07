@@ -78,13 +78,3 @@ int empty(CQueue *queue) {
   return queue->head == NULL;
 }
 
-
-
-
-
-
-
-
-
-
-
