@@ -11,7 +11,7 @@ int NumberOfSetBits(int i)
 }
 
 
-unsigned int bit_count (unsigned int value) {
+unsigned int bit_count(unsigned int value) {
 	unsigned int count = 0;
 	while (value > 0) {           // until all bits are zero
 		if ((value & 1) == 1)     // check lower bit
@@ -21,11 +21,27 @@ unsigned int bit_count (unsigned int value) {
 	return count;
 }
 
+int bit_count2(int x) {
+  int i = 0;
+  while (x) {
+	i++;
+	/*
+	 * x = 1111
+	 * i = 1, x & (x - 1) = 1111 & 1110 = 1110 != 0
+	 * i = 2, x & (x - 1) = 1110 & 1101 = 1100 != 0
+	 * i = 3, x & (x - 1) = 1100 & 1011 = 1000 != 0
+	 * i = 4, x & (x - 1) = 1000 & 0111 = 0000 == 0
+	 */
+    x = x & (x - 1);
+  }
 
+  return i;
+}
 
 int main(void)
 {
 	printf("7 bit count: %u\n", bit_count(7));
 	printf("7 bit count: %d\n", NumberOfSetBits(7));
+	printf("7 bit count: %d\n", bit_count2(7));
 	return 0;
 }
