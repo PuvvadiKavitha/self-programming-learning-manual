@@ -86,6 +86,11 @@ int main(void)
 	 * >> << Fun:
 	 * 		1. x >> 1: x / 2
 	 * 		2. x << 1: x * 2
+	 * Note:
+	 * 		<<: Fill 0 on the right.
+	 * 		>>:
+	 * 			1. signed  : Fill 1 on the left.
+	 * 			2. unsigned: Fill 0 on the left.
 	 */
 	unsigned char ch10 = 2;		// 0000 0010
 	printf("2 >> 1 = %d, 2 << 1 = %d\n", ch10 >> 1 , ch10 << 1);

@@ -1,12 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int main() {
+	float f1 = 1.0;
+	double db = 2.3;
+	// 只有整数和字符型的数据才适用于位运算实数型不能参加位运算 浮点不行
+	printf("%f", f1 & 1); 
+	printf("%f", db & 1);
+	return 0;
+}
+
 
 int main3() {
 	// Octal 
 	int num = 010;
 	printf("%d\n", num);
-	
+
 	int a = 0x12345678;
 	printf("%p\n", &a);
 	return 0;
