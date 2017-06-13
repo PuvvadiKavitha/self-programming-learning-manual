@@ -18,7 +18,7 @@ int *binary_search_1(int *array, int length, int key) {
 
   while (low <= high) {
     mid = (high + low) / 2;
-
+	printf("binary_search_1: mid = %d\n", mid);
 	if (key < array[mid])
 		high = mid - 1;
 	else if (key > array[mid])
@@ -49,6 +49,7 @@ int *binary_search_2(int *array, int length, int key) {
 
   while (low <= high) {
     mid = low + ((high - low) >> 1);
+	printf("binary_search_2: mid = %d\n", mid - low);
 	
 	if (key < *mid)
 		high = mid - 1;
@@ -79,6 +80,7 @@ int *binary_search_3(int *array, int low, int high, int key) {
 	  return NULL;
   
   int mid = (high + low) / 2;
+  printf("binary_search_3: mid = %d\n", mid);
   
   if (key < array[mid])
 	  return binary_search_3(array, low, mid - 1, key);
@@ -106,6 +108,7 @@ int *binary_search_4(int *array, int *low, int *high, int key) {
 	  return NULL;
   
   int *mid = low + ((high - low) >> 1);
+  printf("binary_search_4: mid = %d\n", mid - low);
   
   if (key < *mid)
 	  return binary_search_4(array, low, mid - 1, key);
@@ -120,13 +123,13 @@ int *binary_search_4(int *array, int *low, int *high, int key) {
 
 int main(int argc, char **argv)
 {
-  int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int a[11] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
   int key = atoi(argv[1]);
 
-  int *find1 = binary_search_1(a, 10, key);
-  int *find2 = binary_search_2(a, 10, key);
-  int *find3 = binary_search_3(a, 0, 10, key);
-  int *find4 = binary_search_4(a, a, a + 10, key);
+  int *find1 = binary_search_1(a, 11, key);
+  int *find2 = binary_search_2(a, 11, key);
+  int *find3 = binary_search_3(a, 0, 11, key);
+  int *find4 = binary_search_4(a, a, a + 11, key);
   
   printf("%d\n", *find1);
   printf("%d\n", *find2);
