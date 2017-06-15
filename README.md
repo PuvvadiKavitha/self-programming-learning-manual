@@ -1,9 +1,7 @@
-# MCODE
-This is all my code.
-
+# university project
+university project
 
 # About Me
-- cheng-zhi：C/C++
 - GitHub   ：[https://github.com/cheng-zhi](https://github.com/cheng-zhi)
 - 个人主页 ：[http://cheng-zhi.me](http://cheng-zhi.me)
 - 微博     ：@cheng-zhi
