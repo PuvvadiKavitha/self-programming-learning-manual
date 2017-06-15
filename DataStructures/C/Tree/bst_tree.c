@@ -123,3 +123,84 @@ int bst_get_max(BSTNode *node) {
 		current = current->right;
 	return current->data;
 }
+
+
+int bst_is(BSTNode *node) {
+	if (NULL == node)
+		return 1;
+	return bst_is_between(node, INT_MIN, INT_MAX);
+}
+
+
+int bst_is_between(BSTNode *node, int min, int max) {
+	if (NULL == node)
+		return 1;
+	return node->data > min && node->data < max &&
+		bst_is_between(node->left, min, node->data) &&
+		bst_is_between(node->right, node->data, max);
+}
+
+
+BSTNode *bst_delete_value(BSTNode *node, int value) {
+	if (NULL == node)
+		return NULL;
+	if (value < node->data) {
+		node->left = bst_delete_value(node->left, value);
+	} else if (value > node->data) {
+		node->right = bst_delete_value(node->right, value);
+	} else {
+		if ((NULL == node->left) && (NULL == node->right)) {
+			free(node);
+			node = NULL;
+		} else if (NULL == node->left) {
+			BSTNode *tmp = node;
+			node = node->left;
+			free(tmp);
+			tmp = NULL;
+		} else if (NULL == node->right) {
+			BSTNode *tmp = node;
+			node = node->right;
+			free(tmp);
+			tmp = NULL;
+		} else {
+			int right_min = bst_get_min(node->right);
+			node->data = right_min;
+			node->right = bst_delete_value(node->right, right_min);
+		}
+	}
+
+	return node;
+}
+
+
+
+int bst_get_successor(BSTNode *node, int value) {
+	if (NULL == node)
+		return -1;
+	
+	BSTNode *target = node;
+	
+	while (target->data != value) {
+		if (value < target->data)
+			target = target->left;
+		else if (value > target->data)
+			target = target->right;
+	}
+
+	if (target->right != NULL) {
+		return bst_get_min(target->right);
+	} else {
+		BSTNode *successor = NULL;
+		BSTNode *ancestor = node;
+		while (ancestor != NULL) {
+			if (value < ancestor->data) {
+				successor = ancestor;
+				ancestor = ancestor->left;
+			} else {
+				ancestor = ancestor->right;
+			}
+		}
+		
+		return successor->data;
+	}
+}

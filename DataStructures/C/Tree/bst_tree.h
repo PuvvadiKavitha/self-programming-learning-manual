@@ -2,6 +2,7 @@
 #define BST_TREE_H_
 
 #include <stdio.h>
+#include <limits.h>
 
 typedef struct BSTNode {
 	int data;
@@ -32,6 +33,14 @@ int max_num(const int a, const int b);
 int bst_get_min(BSTNode *node);
 
 int bst_get_max(BSTNode *node);
+
+int bst_is(BSTNode *node);
+
+int bst_is_between(BSTNode *node, int min, int max);
+
+BSTNode *bst_delete_value(BSTNode *node, int value);
+
+int bst_get_successor(BSTNode *node, int value);
 
 #endif // BST_TREE_H_
 

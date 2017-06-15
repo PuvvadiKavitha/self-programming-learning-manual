@@ -74,6 +74,45 @@ void test_get_min_max() {
 }
 
 
+void test_is() {
+	BSTNode *root = NULL;
+	root = bst_insert(root, 5);
+	root = bst_insert(root, 4);
+	root = bst_insert(root, 6);
+	root = bst_insert(root, 3);
+
+	assert(bst_is(root) == 1);	
+	bst_delete(root);
+}
+
+
+void test_delete_value() {
+	BSTNode *root = NULL;
+	root = bst_insert(root, 5);
+	root = bst_insert(root, 4);
+	root = bst_insert(root, 6);
+	root = bst_insert(root, 3);
+
+	bst_delete_value(root, 3);	
+	assert(bst_is_in(root, 3) == 0);	
+
+	bst_delete(root);
+}
+
+
+void test_successor() {
+	BSTNode *root = NULL;
+	root = bst_insert(root, 5);
+	root = bst_insert(root, 4);
+	root = bst_insert(root, 6);
+	root = bst_insert(root, 3);
+
+	assert(4 == bst_get_successor(root, 3));
+
+	bst_delete(root);
+}
+
+
 
 
 void run_all_test() {
@@ -81,7 +120,10 @@ void run_all_test() {
 //	test_count();
 //	test_is_in();
 //	test_height();
-	test_get_min_max();
+//	test_get_min_max();
+//	test_is();
+//	test_delete_value();
+	test_successor();
 }
 
 int main(void) {
