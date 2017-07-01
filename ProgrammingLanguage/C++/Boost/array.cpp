@@ -17,7 +17,7 @@ int main() {
 		std::cout << px[i] << " " << a[i] << std::endl;
 	
 	//string array
-	boost::array<string, 5> b = { "calc", "notepad", "tasklist", "write", "dir" };
+	boost::array<std::string, 5> b = { "calc", "notepad", "tasklist", "write", "dir" };
 	for (int i = 0; i < b.size(); i++)
 		std::cout << b[i] << std::endl;
 
