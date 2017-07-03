@@ -1,63 +1,78 @@
 #include <iostream>
-#include <boost/regex.hpp>
 #include <string>
+#include <boost/regex.hpp>
 #include <vector>
-using namespace std;
-using namespace boost;
 
-//匹配邮箱---网页爬虫
-int mainsadfsdfsa()
-{
-	boost::regex reg("\\w+@\\w+(\.\\w+)+");
-	string s = "872785786@qq.com";
-	cout << boost::regex_match(s, reg) << endl; 
 
-	cin.get();
-	return 0;
+/*
+ * Study wite:
+ * https://deerchao.net/tutorials/regex/regex.htm
+ * http://www.runoob.com/regexp/regexp-tutorial.html
+ */
+
+int main1() {
+  boost::regex reg("[0-9]+");
+  std::string str = "123456";
+  std::cout << boost::regex_match(str, reg) << std::endl;
+  return 0;
 }
 
 
-
-int main78567865787()
-{ 
-	boost::regex reg4("[^13579]");  //^取补集
-	std::string s = "0123456789";  
-	boost::sregex_iterator it(s.begin(), s.end(), reg4); 
-	boost::sregex_iterator end;  
-	while (it != end)     
-		std::cout << *it++; 
-	cin.get();
-	return 0;
-
+int main2() {
+  boost::regex reg("^[0-9]+abc$");
+  std::string str = "123abc";
+  std::cout << boost::regex_match(str, reg) << std::endl;
+  return 0;
 }
 
 
 
 
-int main563465()
-{
+int main3() {
+  boost::regex reg("\\w+@\\w+(.\\w+)+");
+  std::string s = "872785786@qq.com";
+  std::cout << boost::regex_match(s, reg) << std::endl; 
+
+  return 0;
+}
+
+
+
+
+int main4() { 
+  boost::regex reg("[^13579]"); 
+  std::string s = "0123456789";  
+  boost::sregex_iterator begin(s.begin(), s.end(), reg); 
+  boost::sregex_iterator end;  
+  while (begin != end)     
+    std::cout << *begin++; 
+
+  std::cout << std::endl;
+  return 0;
+}
+
+
+
+
+
+int main5() {
 	boost::regex reg("/");
-	string s = "Split/Values/Separated/By/Slashes";
-	vector<string> vec;
-	//分割字符串
+	std::string s = "Split/Values/Separated/By/Slashes";
+	std::vector<std::string> vec;
+	
+	// Using reg to split string.
 	boost::sregex_token_iterator it_begin(s.begin(), s.end(), reg, -1);
 	boost::sregex_token_iterator it_end;
 	while (it_begin != it_end)
-	{
 		vec.push_back(*it_begin++);
-	}
-
-	for_each(vec.begin(), vec.end(), [](string str)
+	
+	std::for_each(vec.begin(), vec.end(), [](std::string str)
 	{
-		cout << str.c_str() << " ";
+		std::cout << str.c_str() << " ";
 	});
 
-
-
-
-	cin.get();
+	std::cout << std::endl;
 	return 0;
-
 }
 
 
@@ -65,185 +80,122 @@ int main563465()
 
 
 
-class regex_callback
-{
+
+class regex_callback {
 public:
 	int sum;
-	regex_callback() : sum(0)
-	{
-
-	}
+	regex_callback() : sum(0) { }
 
 	template<typename T> 
-	void operator()(const T& what)
-	{
+	void operator()(const T& what) {
 		this->sum += atoi(what[1].str().c_str());
 	}
-	int getSum() const
-	{
+
+	int getSum() const {
 		return this->sum;
 	}
 
-
-
-protected:
-private:
 };
 
 
-int main4323523()
-{
-	boost::regex reg("(\\d+),?");
-	string s = "1,1,2,3,5,8,13,21";
-	boost::sregex_iterator it_begin(s.begin(), s.end(), reg);
-	boost::sregex_iterator it_end;
-	regex_callback c;
-	int sum = for_each(it_begin, it_end, c).getSum();
+int main6() {
+  boost::regex reg("(\\d+),?");
+  std::string s = "1,1,2,3,5,8,13,21";
+  boost::sregex_iterator it_begin(s.begin(), s.end(), reg);
+  boost::sregex_iterator it_end;
+	
+  regex_callback c;
+  // Get sum
+  int sum = std::for_each(it_begin, it_end, c).getSum();
 	 
-	cout << sum << endl;
+  std::cout << sum << std::endl;
 
-
-
-	cin.get();
-	return 0;
+  return 0;
 }
 
 
 
-int main231ertewt()
-{
-	/*
-	当此字符紧随任何其他限定符（*、+、?、{n}、{n,}、{n,m}）之后时，匹配模式是“非贪心的”。
-	“非贪心的”模式匹配搜索到的、尽可能短的字符串，而默认的“贪心的”模式匹配搜索到的、尽可能长的字符串。
-	例如，在字符串“oooo”中，“o+?”只匹配单个“o”，而“o+”匹配所有“o”。
-	*/
+
+int main7() {
 	boost::regex reg("(.*?)(\\d{2})");
-	//+  *默认是贪婪匹配，即匹配最后一个符合条件的
-	//加上?设置为非贪婪的重复
-	boost::cmatch m;//匹配的文本不是string类型
+	boost::cmatch m;
 	const char* text = "Note that I'm 31 years old, not 32";
-	if (boost::regex_search(text, m, reg))
-	{
-		if (m[1].matched)
-		{
-			cout << "(.*)matched:" << m[1].str() << endl;
-		} 
-		if (m[2].matched)
-		{
-			cout << "age:" << m[2] << endl;
-		}
+	// Search result
+	if (boost::regex_search(text, m, reg)) {
+		if (m[1].matched) 
+			std::cout << "(.*)matched:" << m[1].str() << std::endl;
+		 
+		if (m[2].matched) 
+			std::cout << "age:" << m[2] << std::endl;
 	}
 
-	cin.get();
 	return 0;
 }
 
 
  
-int mainadsadfsa()
-{
 
-// 	boost::regex reg("(Colo)(u)(r)", boost::regex::icase | boost::regex::perl);
-// 	std::string s = "Colour, colours, color, colourize";
-// 	s = boost::regex_replace(s, reg, "$1$3");
-// 	std::cout << s;
-
-
+int main8() {
 	boost::regex reg("(Colo)(u)(r)", boost::regex::icase | boost::regex::perl);
-	string s = "Colour, colours, color, colourize";
-	//"$1$3", 表示替换文本为第一个和第三个子表达式
+	std::string s = "Colour, colours, color, colourize";
+	// Replace 1th and 3th string.
 	s = boost::regex_replace(s, reg, "$1$3");
-	cout << s;
+	std::cout << s;
 
-	/*
-	//本地化
-	locale::global(locale("English"));
-	string str = "chengzhi123  jiayu213";
-	string str2 = "_____";
-	boost::regex expr("\\d");
-	//根据正则表达式将str中匹配的部分替换为str2
-	cout << boost::regex_replace(str, expr, str2) << endl; 
-	*/
-
-	cin.get();
 	return 0;
 }
 
-int main75743564()
-{
+
+int main9() {
 	boost::regex reg("(new)|(delete)");
 	boost::smatch m;
-	string s = "Calls to new must be followed by delete.Calling simply new results in a leak";
-	/*
-	if (regex_search(s, m, reg))
-	{
-		if (m[1].matched)
-		{
-			cout << "The expression (new) matched!" << endl;
-		}
-		if (m[2].matched)
-		{
-			cout << "The expression (delete) matched!" << endl;
-		}
-	}*/
+	std::string s = "Calls to new must be followed by delete.Calling simply new results in a leak";
+
 	int new_counter = 0;
 	int delete_counter = 0;
-	string::const_iterator it_begin = s.begin();
-	string::const_iterator it_end = s.end();
-	while (regex_search(it_begin, it_end, m, reg))
-	{
+	
+	std::string::const_iterator it_begin = s.begin();
+	std::string::const_iterator it_end = s.end();
+	
+	while (regex_search(it_begin, it_end, m, reg)) {
 		m[1].matched ? ++new_counter : ++delete_counter;
-		//把迭代器 it 设置为 m[0].second。match_results[0] 返回对匹配整个正则表达式的子匹配的引用
-		//因此我们可以确认这个匹配的结束点就是下次运行regex_search的起始点
 		it_begin = m[0].second;
 	}
+
 	if (new_counter != delete_counter)    
 		std::cout << "Leak detected!\n";  
 	else    
 		std::cout << "Seems ok...\n";
 
-
-
-
-	 
-
-	/*
-	//本地化
-	locale::global(locale("English"));
-	string str = "china5english345dfgdsg";
-	boost::regex expr("(\\w+)\\d(\\w+)");
-	boost::smatch what;
-	//查找匹配正则表达式的子序列
-	if (boost::regex_search(str, what, expr))
-	{
-		cout << what[0] << endl;
-		cout << what[1] << endl;
-		cout << what[2] << endl;
-	}
-	else
-	{
-		cout << "fail" << endl;
-	} 
-
-	*/
-	cin.get();
 	return 0;
 }
 
 
-int mainwertqwwq()
-{
-	//本地化
-	locale::global(locale("English"));
-	string str = "123Hello 12 Hello";
-	             // 3个数字 一个单词 一个任意字符 2个数字或者N/A 一个空格 重复匹配第一个单词
-	boost::regex expr("\\d{3}([a-zA-Z]+).(\\d{2}|N/A)\\s\\1");
-	//判断str是否匹配正则表达式
-	//匹配所有输入
-	cout << boost::regex_match(str, expr) << endl;
-	
-	 
+int main() {
+	//std::locale::global(std::locale("English"));
+	std::string str = "china5english345dfgdsg";
+	boost::regex expr("(\\w+)\\d(\\w+)");
+	boost::smatch what;
+	// Search sub match string.
+	if (boost::regex_search(str, what, expr)) {
+		std::cout << what[0] << std::endl;
+		std::cout << what[1] << std::endl;
+		std::cout << what[2] << std::endl;
+	} else {
+		std::cout << "fail" << std::endl;
+	} 
 
-	cin.get();
+	return 0;
+}
+
+
+int main11() {
+	//std::locale::global(std::locale("English"));
+	std::string str = "123Hello 12 Hello";
+	
+	boost::regex expr("\\d{3}([a-zA-Z]+).(\\d{2}|N/A)\\s\\1");
+	
+	std::cout << boost::regex_match(str, expr) << std::endl;
+	
 	return 0;
 }

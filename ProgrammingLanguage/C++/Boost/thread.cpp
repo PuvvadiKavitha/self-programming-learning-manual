@@ -3,55 +3,40 @@
 #include <cstdlib>
 
 
-
-using namespace std;
-using namespace boost;
-
-
-void wait(int sec)
-{
+void wait(int sec) {
 	boost::this_thread::sleep(boost::posix_time::seconds(sec));
 }
 
 
-void threadA()
-{
-	for (int i = 0; i < 10; i++)
-	{
+void threadA() {
+	for (int i = 0; i < 10; i++) {
 		wait(1);
-		cout << i << endl;
+		std::cout << i << std::endl;
 	}
 }
 
 
-void threadB()
-{
-	try
-	{ 
-		for (int i = 0; i < 10; i++)
-		{
+void threadB() {
+	try { 
+		for (int i = 0; i < 10; i++) {
 			wait(1);
-			cout << i << endl;
+		    std::cout << i << std::endl;
 		}
-	}
-	catch (thread_interrupted& t)
-	{
-		cout << "Thread B is been interrupted" << endl;
+	} catch (boost::thread_interrupted& t) {
+		std::cout << "Thread B is been interrupted" << std::endl;
 	}
 	
 }
 
 
-
-
-int maingjg()
-{
+int main() {
 	boost::thread t(threadB);
 	wait(3);
-	//Interrupt threadB
+	
+	// Interrupt threadB
 	t.interrupt();
+	
 	t.join();
 
-	cin.get();
 	return 0;
 }

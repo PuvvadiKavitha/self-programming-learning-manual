@@ -22,8 +22,7 @@ int main()
 
 	//接收信息的字符串
 	char _receiver_str[1024] = { 0 };
-	while (true)
-	{
+	while (true) {
 		//客户端请求的ip的和端口
 		ip::udp::endpoint _send_point;
 		
@@ -41,6 +40,7 @@ int main()
 		//清空字符串，方便下次接收
 		memset(_receiver_str, '\0', 1024);
 	}  
+
 	return 0;
 }
 

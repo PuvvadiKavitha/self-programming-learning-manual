@@ -3,7 +3,6 @@
 
 
 int main() {
-	
 	boost::array<int, 5> a = { 1, 2, 3, 4, 5 };
 	
 	// Modify

@@ -2,14 +2,11 @@
 #include <string>
 #include <boost/asio.hpp>
 
-
-
 using namespace std;
 using namespace boost::asio;
 
 
-int main()
-{
+int main() {
 	io_service _sa;
 	ip::udp::socket _udp_socket(_sa);
 
@@ -18,8 +15,7 @@ int main()
 	_udp_socket.open(_local_add.protocol());
 	
 	char _receiver_str[1024] = { 0 };
-	while (true)
-	{
+	while (true) {
 		string _send_str;
 		cout << "input send str:";
 		cin >> _send_str;

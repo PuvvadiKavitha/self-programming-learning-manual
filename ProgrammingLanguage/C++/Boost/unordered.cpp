@@ -1,15 +1,10 @@
 #include <iostream>
-#include <boost/unordered_set.hpp>
 #include <string>
+#include <boost/unordered_set.hpp>
 
-
-using namespace std;
-using namespace boost;
-
-int main1231rrty()
-{
-	//与C++底层的实现机制不同，改红黑树为哈希表实现
-	boost::unordered_set<string> hashset;
+int main() {
+	boost::unordered_set<std::string> hashset;
+	
 	hashset.insert("c");
 	hashset.insert("d");
 	hashset.insert("e");
@@ -17,14 +12,9 @@ int main1231rrty()
 	hashset.insert("b");
 	
 	for (auto ib = hashset.begin(); ib != hashset.end(); ib++)
-	{
-		cout << *ib << endl;
-	}
+		std::cout << *ib << std::endl;
 
-	cout << (hashset.find("a") != hashset.end()) << endl;
+	std::cout << (hashset.find("a") != hashset.end()) << std::endl;
 
-
-
-	system("pause");
 	return 0;
 }
