@@ -1,0 +1,13 @@
+set syntax=on 
+set fenc=utf-8  
+set fencs=utf-8,usc-bom,euc-jp,gb18030,gbk,gb2312,cp936 
+set nocp  
+set number  
+set ai  
+set si 
+set tabstop=4  
+set sw=4  
+set ruler  
+set incsearch  
+set showmatch  
+set matchtime=5  
