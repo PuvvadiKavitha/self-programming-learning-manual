@@ -7,11 +7,13 @@ static void select_sort(int a[], int n) {
 	for (int i = 0; i < n - 1; i++) {
 		int min_i = i;
 		
-		for (int j = i + 1; j < 10; j++) {
+		// swap index
+		for (int j = i + 1; j < n; j++) {
 			if (a[j] < a[min_i])
 				min_i = j;
 		}
 
+		// swap item
 		if (min_i != i) {
 			a[min_i] = a[min_i] ^ a[i];
 			a[i] = a[i] ^ a[min_i];
@@ -22,8 +24,7 @@ static void select_sort(int a[], int n) {
 
 
 
-void main()
-{
+void main() {
 	time_t ts;
 	srand((unsigned int)time(&ts));
 	int a[10] = { 0 }; 
@@ -34,7 +35,7 @@ void main()
 
 	
 	printf("\n\n");
-	select_sort(a, sizeof(a));
+	select_sort(a, sizeof(a) / sizeof(a[0]));
 
 	printf("select_sort:\n\n");
 	for (int i = 0; i < 10; i++)
