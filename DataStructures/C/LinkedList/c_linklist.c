@@ -173,8 +173,7 @@ void insert(node_t **head, int index, int item) {
   if (prev) {
 	new_node->next = prev->next;
     prev->next = new_node;
-  }
-  else {
+  } else {
 	new_node->next = *head;
     *head = new_node;
   }
