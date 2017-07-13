@@ -1,6 +1,8 @@
 #include "max_heap.h"
 
 
+const int kQueueCapacity = 1000;
+
 void maxheap_insert(MaxHeap *heap, int value) {
 	if (heap->size == heap->capacity) {
 		printf("Can't add more items.\n");
@@ -20,7 +22,7 @@ void maxheap_sift_up(MaxHeap *heap, int heap_size) {
 	while (heap_size > 1) {
 		parent = heap_size / 2;
 		
-		if (heap->elements[parent] < heap->elements[heap_size->size]) {
+		if (heap->elements[parent] < heap->elements[heap_size]) {
 			temp = heap->elements[heap_size];
 			heap->elements[heap_size] = heap->elements[parent];
 			heap->elements[parent] = temp;
@@ -37,17 +39,17 @@ int maxheap_get_max(MaxHeap *heap) {
 }
 
 int maxheap_get_size(MaxHeap *heap) {
-	return heap->heap_size;
+	return heap->size;
 }
 
 
 int maxheap_is_empty(MaxHeap *heap) {
-	return !heap->heap_size;
+	return !heap->size;
 }
 
 int maxheap_extract_max(MaxHeap *heap) {
 	int max = heap->elements[1];
-	heap->elements[1] = heap->elements[heap->heap_size];
+	heap->elements[1] = heap->elements[heap->size];
 	heap->size--;
 	
 	maxheap_sift_down(heap, 1);
@@ -63,10 +65,10 @@ int maxheap_sift_down(MaxHeap *heap, int index) {
 	while (i * 2 <= heap->size) {
 		int left = 2 * i;
 		int right = 2 * i + 1;
-		bool has_left  = (left  <= heap_size ? 1 : 0);
-		bool has_right = (right <= heap_size ? 1 : 0);
+		bool has_left  = (left  <= heap->size ? 1 : 0);
+		bool has_right = (right <= heap->size ? 1 : 0);
 
-		if (has_left && heap_right) {
+		if (has_left && has_right) {
 			int left_value = heap->elements[left];
 			int right_value = heap->elements[right];
 			
@@ -85,7 +87,7 @@ int maxheap_sift_down(MaxHeap *heap, int index) {
 		if (heap->elements[swap_index] > heap->elements[i]) {
 			temp = heap->elements[i];
 			heap->elements[i] = heap->elements[swap_index];
-			heap->elements[swap_index] = tamp;
+			heap->elements[swap_index] = temp;
 
 			i = swap_index;
 		} else {
@@ -98,7 +100,7 @@ int maxheap_sift_down(MaxHeap *heap, int index) {
 
 void maxheap_remove_node(MaxHeap *heap, int index) {
 	heap->elements[index] = heap->elements[heap->size];
-	heap_size--;
+	heap->size--;
 
 	maxheap_sift_down(heap, index);
 }
@@ -148,6 +150,51 @@ void maxheap_percolate_down(int *numbers, int count, int index) {
 		}
 	}
 }
+
+
+
+
+void maxheap_sort(int *numbers, int count) {
+	int temp = 0;
+	maxheap_heapify(numbers, count);
+
+	for (int i = count - 1; i > 0; i--) {
+		temp = numbers[0];
+		numbers[0] = numbers[i];
+		numbers[i] = temp;
+
+		maxheap_percolate_down(numbers, i, 0);
+	}
+}
+
+
+void maxheap_print(MaxHeap *heap) {
+	for (int i = 1; i <= heap->size; i++) 
+		printf("%4d |", heap->elements[i]);
+	putchar('\n');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
