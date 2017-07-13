@@ -58,6 +58,46 @@ char *mystrchr(char *dest, char find_char) {
 
 
 
+char *mystrstr(const char *dest, const char *findstr){
+	if (dest == NULL || findstr == NULL)
+		return NULL;
+	
+	char *destbak = dest;
+	char *p = NULL;
+
+	while (*destbak) {
+		// flag = 1 -> find, otherwise no find.
+		int flag = 1;
+		
+		char *findstrbak = findstr;
+		char *nowdestbak = destbak;
+		
+		while (*findstrbak) {
+			if (*nowdestbak) {
+				if (*findstrbak != *nowdestbak)
+					flag = 0;
+				nowdestbak++;
+				findstrbak++;
+			} else {
+				flag = 0;
+				break;
+			}
+		}
+
+		if (flag) {
+			p = destbak;
+			return p;
+		}
+		
+
+		destbak++;
+	}
+
+	return NULL;
+}
+
+
+
 void init(mystring *string) {
 	string->pstr = NULL;
 	string->length = 0;
@@ -109,6 +149,40 @@ char *string_find_first_char(mystring *string, char find_char) {
 	char *first_find_char = mystrchr(string->pstr, find_char);
 	return first_find_char;
 }
+
+
+char *string_find_first_str(mystring *string, char *find_str) {
+	return mystrstr(string->pstr, find_str);
+}
+
+
+int del_first_find_char(mystring *string, char del_ch) {
+	char *pdelchar = mystrchr(string->pstr, del_ch);
+	if (NULL == pdelchar) {
+		return 0;
+	} else {
+		char *pnext = pdelchar + 1;
+		while (*pnext) 
+			*pdelchar++ = *pnext++;
+		*pdelchar = '\0';
+		return 1;
+	}
+}
+
+int del_first_find_str(mystring *string, char *find_str) {
+	char *pfindstr = mystrstr(string->pstr, find_str);
+	if (NULL == pfindstr) {
+		return 0;
+	} else {
+		int length = mystrlen(find_str);
+		char *pnext = pfindstr + length;
+		while (*pnext) 
+			*pfindstr++ = *pnext++;
+		*pfindstr = '\0';
+		return 1;
+	}
+}
+
 
 int main() {
 
