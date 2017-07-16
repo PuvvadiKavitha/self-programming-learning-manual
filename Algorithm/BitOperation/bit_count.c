@@ -3,8 +3,7 @@
 
 
 
-int NumberOfSetBits(int i)
-{
+int NumberOfSetBits(int i) {
 	i = i - ((i >> 1) & 0x55555555);
 	i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
 	return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
@@ -38,10 +37,22 @@ int bit_count2(int x) {
   return i;
 }
 
+static int bit_count3(int number) {
+    int count = 0;
+    for (int i = 0; i < 32; i++) {
+        if ((number & (1 << i)) != 0) {
+            count++;
+        }
+    }
+    
+    return count;
+}
+
 int main(void)
 {
 	printf("7 bit count: %u\n", bit_count(7));
 	printf("7 bit count: %d\n", NumberOfSetBits(7));
 	printf("7 bit count: %d\n", bit_count2(7));
+	printf("7 bit count: %d\n", bit_count3(7));
 	return 0;
 }
